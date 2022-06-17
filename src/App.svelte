@@ -243,8 +243,10 @@
     </div>
   </div>
 </main>
-<footer>
-  <p>
+<footer
+  style="width: max-content; max-width: max-content; left: 50vw; position: absolute; transform:translate(-50%,0)"
+>
+  <p style="width: max-content">
     <code
       style="background: #000000{apiResponse.length > 0
         ? '66'
