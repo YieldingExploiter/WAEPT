@@ -4,15 +4,18 @@ body {
   width: 100%;
   height: 100%;
 }
-
-body {
+body,
+main {
   color: #dddddd;
   background: #1a1a1a;
+}
+body {
   margin: 0;
-  padding: 8px;
+  padding: 0 0;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  overflow-y: scroll;
 }
 
 a {

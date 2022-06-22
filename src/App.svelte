@@ -21,7 +21,7 @@
   const update = async () => {
     try {
       fetching = true;
-      const _ApiResponse = await (await fetch(api)).json();
+      const _ApiResponse = await (await fetch(api + '/status')).json();
       apiResponse = [];
       for (const k in _ApiResponse) {
         if (Object.prototype.hasOwnProperty.call(_ApiResponse, k)) {
@@ -163,6 +163,16 @@
   };
   // @ts-expect-error
   window.update = update;
+  setInterval(
+    () =>
+      (document.querySelector('#rawrx3')
+        ? document.querySelector('#rawrx3')
+        : { addEventListener: () => {} }
+      ).addEventListener('click', () =>
+        document.querySelector('[aria-label="Disclaimer"]').remove(),
+      ),
+    500,
+  );
 </script>
 
 <main
@@ -242,26 +252,73 @@
       <!-- {/if} -->
     </div>
   </div>
-</main>
-<footer
-  style="width: max-content; max-width: max-content; left: 50vw; position: absolute; transform:translate(-50%,0)"
->
-  <p style="width: max-content">
-    <code
-      style="background: #000000{apiResponse.length > 0
-        ? '66'
-        : '22'}; padding: 8px 8px; border-radius:4px; display:inline-block; width: max-content;"
-      ><a
-        href={api}
-        target="_blank"
-        aria-label="API URL"
-        style="color: #ff3e00 !important">{api}</a
-      ></code
+  <p aria-label="Credits" style="font-size: small;">
+    Made with ♥ by Yielding#3961 using <a
+      href="https://svelte.dev/"
+      target="_blank">Svelte</a
     >
+    &
+    <a href="https://whatexploitsare.online" target="_blank">the WEAO API</a>
   </p>
-</footer>
+</main>
+
+<div aria-label="Disclaimer" aria-modal="true">
+  <p
+    style="float: right; margin-right: 60px; cursor: pointer; color: #aaaaaa;"
+    id="rawrx3"
+    aria-label="Close"
+  >
+    X
+  </p>
+  <div style="float: left">
+    <h3>Notice</h3>
+    <p>
+      The time represents the time between Robox's last update, and the
+      Exploit's last update.
+    </p>
+    <p>
+      This means that, <b>if an exploit updates after it's initial update</b>
+      (ie to add new features before the next roblox update drops),
+      <b>it's update time will not represent the time it took to update.</b>
+    </p>
+    <small>
+      <i>Typically</i>, if the update time is less than 2 days, it represents
+      the actual unpatch time.<br />
+      Otherwise, it depends on the executor.
+    </small>
+  </div>
+</div>
 
 <style lang="scss">
+  a,
+  a:visited {
+    // links in execs
+    color: #ffffff !important;
+    text-decoration: dotted underline #ffffffaa;
+  }
+  [aria-label='Disclaimer'] {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: calc(100vw - 15px);
+    background: #0a0a0aaa;
+    padding: 15px 15px;
+    backdrop-filter: blur(4px) brightness(0.7);
+    display: block;
+    p {
+      max-width: 95%;
+      margin: 4px 2px;
+      margin-bottom: 8px;
+    }
+    h3 {
+      margin: 6px 4px;
+      margin-bottom: 12px;
+    }
+    #rawrx3 {
+      position: absolute;
+      right: 0;
+    }
+  }
   @media screen and (max-width: 1024px) {
     .♥ {
       display: none;
@@ -356,6 +413,11 @@
   @media (max-width: 1410px) {
     .⧈ {
       text-align: center;
+    }
+  }
+  @media (max-width: 700px) {
+    [aria-label='Disclaimer'] {
+      display: none;
     }
   }
 </style>
