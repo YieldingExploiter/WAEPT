@@ -28,7 +28,7 @@ jobs:
           git push -u origin gh-pages --force;
       - name: Move dist to current dir
         run: |
-          rm -r !(dist|.git|.github);
+          rm -rf node_modules index.html package.json README.md svelte.config.js tsconfig.json tsconfig.nodejson vite.config.ts;
           mv dist/* ./;
       - name: Commit
         run: |
